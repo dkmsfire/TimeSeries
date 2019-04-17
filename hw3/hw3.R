@@ -1,3 +1,4 @@
+#13
 library(orcutt)
 data = read.csv("13.csv")
 attach(data)
@@ -54,3 +55,60 @@ model.fit = cochrane.orcutt(model)
 model.fit
 
 #33
+library(dyn)
+data = read.csv("13.csv")
+yt = ts(data$y)
+xt = ts(data$x)
+dyn$lm(yt ~ xt + lag(yt, -1))
+
+#36
+#a
+data = read.csv("b.25.csv")
+summary(data)
+plot(data$Fatalities ~ data$Year)
+#b
+plot(data$Fatalities ~ data$Licensed.Drivers..Thousands.)
+attach(data)
+#c
+model = lm(Fatalities ~ Licensed.Drivers..Thousands.)
+summary(model)
+#d
+plot(model$residuals)
+#e
+library(lmtest)
+model.dwt = dwtest(Fatalities ~ Licensed.Drivers..Thousands.)
+model.dwt
+
+#40
+#a
+data = read.csv("b.26.csv")
+Sales = data.frame(sales = double())
+for(i in 1:52){
+  block = data.frame(sales = double())
+  for(j in 1:12){
+    block = data[i , 2 * j - 1]
+    Sales = rbind(Sales, block)
+  }
+}
+Permit = data.frame(permit = double())
+for(i in 1:52){
+  block = data.frame(permit = double())
+  for(j in 1:12){
+    block = data[i, 2 * j]
+    Permit = rbind(Permit, block)
+  }
+}
+Data = cbind(Sales, Permit)
+colnames(Data) = c("sales", "permit")
+attach(Data)
+plot(sales)
+#b
+plot(sales ~ permit)
+#c
+model = lm(sales ~ permit)
+summary(model)
+#d
+plot(model$residuals)
+#e
+model.dwt = dwtest(sales ~ permit)
+model.dwt
