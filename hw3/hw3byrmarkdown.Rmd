@@ -1,0 +1,27 @@
+---
+title: "TimeSeriesHw3"
+author: "104304033 統計四 劉書宏"
+date: "2019/4/18"
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Chapter3
+## 13
+```{r echo = FALSE}
+library(orcutt)
+data = read.csv("13.csv")
+attach(data)
+model = lm(y~x)
+summary(model)
+```
+
+```{r echo=FALSE}
+model.fit = cochrane.orcutt(model)
+model.fit
+```
