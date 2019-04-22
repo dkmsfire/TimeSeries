@@ -1,2 +1,3 @@
-This is time series homework. 
-Update if I finish it. 
+#Time Serires Homework and Learning
+
+This is where I push my homework , and some idea while learning.
